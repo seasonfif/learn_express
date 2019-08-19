@@ -42,24 +42,11 @@ exports.upload = (req, res)=>{
 }
 
 exports.doUpload = (req, res)=>{
-
-    var form = new formidable.IncomingForm()
-    form.encoding = 'utf-8'
-    form.uploadDir = path.normalize(__dirname + '/../tempup')
-    form.keepExtensions = true
-    var file_list = []
-
-    /*form.on('file', (field, file)=> {
-        file_list.push([field, file])
-    })*/
-
-    form.parse(req, (err, fields, files)=>{
-        console.log(fields)
-    })
-
-    /*file.uploadFileToPath(req, (err)=>{
+    file.uploadFileToPath(req, (err)=>{
         if (err){
             res.render('error')
+        }else{
+            res.end()
         }
-    })*/
+    })
 }

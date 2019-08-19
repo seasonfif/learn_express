@@ -19,4 +19,4 @@ app.use((req, res)=>{
     res.render('error')
 })
 
-app.listen(3000, '192.168.31.231')
+app.listen(3000)

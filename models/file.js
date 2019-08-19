@@ -73,8 +73,12 @@ exports.uploadFileToPath = (req, callback)=>{
     })
 
     form.parse(req, (err, fields, files)=>{
-        console.log(fields)
-
+        // console.log(fields)
+        if (err){
+            callback("解析请求失败")
+            return;
+        }
+        var albumName = fields.folderName
         var ran = parseInt(Math.random() * 89999 + 10000)
         file_list.forEach((value, index, array)=>{
             // console.log(util.inspect({value: value, index: index}))
@@ -83,14 +87,16 @@ exports.uploadFileToPath = (req, callback)=>{
             var ttt = sd.format(new Date(), 'YYYYMMDDHHmmss')
             var file_path = file.path
             var old_path = file_path
-            var new_path = __dirname  + '/../uploads/' + ttt + '_' +ran + '_' +file_name
+            var new_path = __dirname  + '/../uploads/' + albumName + '/' + ttt + '_' +ran + '_' +file_name
+            console.log(new_path)
             fs.rename(old_path, new_path, (err)=>{
                 if (err){
-                    console.error(err)
+                    callback('文件改名失败')
                 }else{
                     console.log('receive&rename success:'+ file_name +'\n\n')
                 }
             })
         })
     })
+    callback()
 }
