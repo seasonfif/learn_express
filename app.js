@@ -19,4 +19,8 @@ app.use((req, res)=>{
     res.render('error')
 })
 
+process.on('uncaughtException', function(err) {
+    console.log('Caught exception: ' + err);
+});
+
 app.listen(3000)
